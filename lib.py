@@ -6,7 +6,7 @@ with open('./supported_tlds.json') as f:
 
 
 def domain_status(domain):
-    tld = domain.split('.')[1]
+    tld = domain.split('.', 1)[1]
 
     if tld not in supported_tlds:
         return "This TLD isn't currently supported!"
