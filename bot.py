@@ -37,10 +37,4 @@ async def on_message(message):
         status = domain_status(domain)
         await message.channel.send(status)
 
-        # domain_whois = whois.query(domain)
-        # if domain_whois is None:
-        #     await message.channel.send(f'{domain} may be available!')
-        # else:
-        #     await message.channel.send(f'{domain} is registered at {domain_whois.registrar}')
-
 client.run(TOKEN)
