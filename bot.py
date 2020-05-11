@@ -5,6 +5,8 @@ import whois
 import json
 from dotenv import load_dotenv
 
+from lib import domain_status
+
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
@@ -19,7 +21,7 @@ async def on_ready():
             break
 
     print(
-        f'{client.user} is connected to the following guild:\n'
+        f'{client.user} is connected to the following guild(s):\n'
         f'{guild.name}(id: {guild.id})'
     )
 
@@ -29,12 +31,16 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if 'domain' in message.content:
+    if message.content.startswith('domain'):
         domain = message.content.split(' ')[1]
-        domain_whois = whois.query(domain)
-        if domain_whois is None:
-            await message.channel.send(f'{domain} may be available!')
-        else:
-            await message.channel.send(f'{domain} is registered at {domain_whois.registrar}')
+
+        status = domain_status(domain)
+        await message.channel.send(status)
+
+        # domain_whois = whois.query(domain)
+        # if domain_whois is None:
+        #     await message.channel.send(f'{domain} may be available!')
+        # else:
+        #     await message.channel.send(f'{domain} is registered at {domain_whois.registrar}')
 
 client.run(TOKEN)
