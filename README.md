@@ -8,7 +8,7 @@ Go to [this](https://discord.com/api/oauth2/authorize?client_id=7093207584757514
 
 ### Usage
 
-Simple type `domain example.com` in a channel with domainbot in it to check if it's available!
+Simply type `domain example.com` in a channel with domainbot in it to check if it's available! If it isn't available, it'll let you know which registrar it was registered at.
 
 ## Self-hosting
 
