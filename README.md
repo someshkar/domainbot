@@ -19,7 +19,7 @@ Copy the `.env.example` file to `.env` and populate the environment variables.
 After that, simply run the following commands to get it up and running:
 
 ```console
-pip install -U discord.py whois python-dotenv
+pip install -U discord.py whois python-dotenv validators
 python3 bot.py
 ```
 

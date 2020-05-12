@@ -9,21 +9,15 @@ from lib import domain_status
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
-GUILD = os.getenv('DISCORD_GUILD')
 
 client = discord.Client()
 
 
 @client.event
 async def on_ready():
+    print('{} is connected to the following guild(s):\n'.format(client.user))
     for guild in client.guilds:
-        if guild.name == GUILD:
-            break
-
-    print(
-        f'{client.user} is connected to the following guild(s):\n'
-        f'{guild.name}(id: {guild.id})'
-    )
+        print('{}(id: {})'.format(guild.name, guild.id))
 
 
 @client.event
@@ -35,6 +29,8 @@ async def on_message(message):
         domain = message.content.split(' ')[1]
 
         status = domain_status(domain)
+        print('"{}" returned "{}"'.format(domain, status))
         await message.channel.send(status)
+        return
 
 client.run(TOKEN)

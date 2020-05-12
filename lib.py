@@ -1,11 +1,15 @@
 import json
 import whois
+import validators
 
 with open('./supported_tlds.json') as f:
     supported_tlds = json.loads(f.read())
 
 
-def domain_status(domain):
+def domain_status(domain, expiry=False):
+    if not validators.domain(domain):
+        return "Please enter a valid domain!"
+
     tld = domain.split('.', 1)[1]
 
     if tld not in supported_tlds:
