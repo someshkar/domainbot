@@ -18,6 +18,7 @@ async def on_ready():
     print('{} is connected to the following guild(s):\n'.format(client.user))
     for guild in client.guilds:
         print('{}(id: {})'.format(guild.name, guild.id))
+    print('\n')
 
 
 @client.event
@@ -27,8 +28,8 @@ async def on_message(message):
 
     if message.content.startswith('domain'):
         domain = message.content.split(' ')[1]
-
         status = domain_status(domain)
+
         print('"{}" returned "{}"'.format(domain, status))
         await message.channel.send(status)
         return
