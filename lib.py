@@ -7,6 +7,8 @@ with open('./supported_tlds.json') as f:
 
 
 def domain_status(domain, expiry=True):
+    domain = domain.lower()
+
     if not validators.domain(domain):
         return "Please enter a valid domain!"
 
