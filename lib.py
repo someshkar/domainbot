@@ -22,9 +22,9 @@ def domain_status(domain, expiry=True):
     if domain_whois is None:
         return '{} may be available!'.format(domain)
     else:
-        if expiry:
-            args = [domain, domain_whois.registrar,
-                    domain_whois.expiration_date.strftime("%B %d, %Y")]
-            return '{} is registered at {} and will expire on {}.'.format(*args)
-        args = [domain, domain_whois.registrar]
-        return '{} is registered at {}'.format(*args)
+        if not expiry:
+            args = [domain, domain_whois.registrar]
+            return '{} is registered at {}'.format(*args)
+        args = [domain, domain_whois.registrar,
+                domain_whois.expiration_date.strftime("%B %d, %Y")]
+        return '{} is registered at {} and will expire on {}.'.format(*args)
