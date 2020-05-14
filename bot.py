@@ -11,37 +11,35 @@ from lib import domain_status, featured_domains
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
-client = discord.Client()
 
+class Domainbot(discord.Client):
+    async def on_ready(self):
+        print('{} is connected to the following guild(s):\n'.format(self.user))
+        for guild in client.guilds:
+            print('{0.name} (id: {0.id})'.format(guild))
+        print('\n')
 
-@client.event
-async def on_ready():
-    print('{} is connected to the following guild(s):\n'.format(client.user))
-    for guild in client.guilds:
-        print('{}(id: {})'.format(guild.name, guild.id))
-    print('\n')
+    async def on_message(self, message):
+        if message.author == self.user:
+            return
 
+        if message.content.startswith('domain'):
+            domain = message.content.split(' ')[1]
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+            if ' all ' in message.content:
+                domain = message.content.split(' ')[2]
+                status = featured_domains(domain)
 
-    if message.content.startswith('domain'):
-        domain = message.content.split(' ')[1]
+                print('"{}" returned "{}"'.format(domain, status))
+                await message.channel.send(status)
+                return
 
-        if ' all ' in message.content:
-            domain = message.content.split(' ')[2]
-            status = featured_domains(domain)
+            status = domain_status(domain)
 
             print('"{}" returned "{}"'.format(domain, status))
             await message.channel.send(status)
             return
 
-        status = domain_status(domain)
 
-        print('"{}" returned "{}"'.format(domain, status))
-        await message.channel.send(status)
-        return
-
+client = Domainbot()
 client.run(TOKEN)
