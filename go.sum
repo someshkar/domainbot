@@ -1,0 +1,17 @@
+github.com/asaskevich/govalidator v0.0.0-20200428143746-21a406dcc535 h1:4daAzAu0S6Vi7/lbWECcX0j45yZReDZ56BQsrVBOEEY=
+github.com/asaskevich/govalidator v0.0.0-20200428143746-21a406dcc535/go.mod h1:oGkLhpf+kjZl6xBf758TQhh5XrAeiJv/7FRz/2spLIg=
+github.com/bwmarrin/discordgo v0.20.3 h1:AxjcHGbyBFSC0a3Zx5nDQwbOjU7xai5dXjRnZ0YB7nU=
+github.com/bwmarrin/discordgo v0.20.3/go.mod h1:O9S4p+ofTFwB02em7jkpkV8M3R0/PUVOwN61zSZ0r4Q=
+github.com/gorilla/websocket v1.4.0 h1:WDFjx/TMzVgy9VdMMQi2K2Emtwi2QcUQsztZ/zLaH/Q=
+github.com/gorilla/websocket v1.4.0/go.mod h1:E7qHFY5m1UJ88s3WnNqhKjPHQ0heANvMoAMk2YaljkQ=
+github.com/joho/godotenv v1.3.0 h1:Zjp+RcGpHhGlrMbJzXTrZZPrWj+1vfm90La1wgB6Bhc=
+github.com/joho/godotenv v1.3.0/go.mod h1:7hK45KPybAkOC6peb+G5yklZfMxEjkZhHbwpqxOKXbg=
+github.com/likexian/gokit v0.23.3 h1:1klD04/osK9b16Q9sNEChOOim6oDa14fEuv1JL8yzU4=
+github.com/likexian/gokit v0.23.3/go.mod h1:/asXq96N3H5gVxyfyNuQO7HFoSorzcU+ZMEImyBGZB8=
+github.com/likexian/whois-go v1.7.1 h1:P8gjFh6F5gZ2shft2CfO9yqu6JGtVk05eUVja9IYDPQ=
+github.com/likexian/whois-go v1.7.1/go.mod h1:lnblFx9bGrnTxchHUDr2An3EmSb+aujU48SA0ekPbRw=
+github.com/likexian/whois-parser-go v1.14.3/go.mod h1:nhh8bZ0mHgLu3p0mUV2kh9DgUJ6BXHb5elPgt7CL0VY=
+github.com/likexian/whois-parser-go v1.14.5 h1:zyPnpTcuweEDa9sEDeKZhNurdG764+mZFr6fVK5cDLA=
+github.com/likexian/whois-parser-go v1.14.5/go.mod h1:nhh8bZ0mHgLu3p0mUV2kh9DgUJ6BXHb5elPgt7CL0VY=
+golang.org/x/crypto v0.0.0-20181030102418-4d3f4d9ffa16 h1:y6ce7gCWtnH+m3dCjzQ1PCuwl28DDIc3VNnvY29DlIA=
+golang.org/x/crypto v0.0.0-20181030102418-4d3f4d9ffa16/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
