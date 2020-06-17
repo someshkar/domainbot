@@ -1,28 +1,33 @@
 package lib
 
 import (
+	"fmt"
 	"log"
 	"time"
 
+	d "github.com/bwmarrin/discordgo"
 	"github.com/likexian/whois-go"
 	whoisparser "github.com/likexian/whois-parser-go"
 )
 
 // SingleDomainRes generates the Domainbot
 // response for a single domain
-func SingleDomainRes(domain string) string {
+func SingleDomainRes(domain string, m *d.MessageCreate) string {
 	isRegistered, registrar, expiryStr := checkDomain(domain)
 
 	if isRegistered {
 		t, _ := time.Parse(time.RFC3339, expiryStr)
 		expiry := t.Format("January 2, 2006")
 
-		res := domain + " is registered at " + registrar + " and will expire on " + expiry + "."
+		// res := domain + " is registered at " + registrar + " and will expire on " + expiry + "."
+		res := fmt.Sprintf("%s %s is registered at %s and will expire on %s.",
+			m.Author.Mention(), domain, registrar, expiry)
 		log.Printf("'%s' returned '%s'", domain, res)
 		return res
 	}
 
-	res := domain + " may be available!"
+	// res := domain + " may be available!"
+	res := fmt.Sprintf("%s %s may be available!", m.Author.Mention(), domain)
 	log.Printf("'%s' returned '%s'", domain, res)
 	return res
 }

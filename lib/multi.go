@@ -6,28 +6,34 @@ import (
 	"strings"
 	"sync"
 
+	d "github.com/bwmarrin/discordgo"
 	"github.com/likexian/whois-go"
 	whoisparser "github.com/likexian/whois-parser-go"
 )
 
 // AllDomainRes returns the Domainbot
 // response for multiple popular domains
-func AllDomainRes(s string) string {
+func AllDomainRes(s string, m *d.MessageCreate) string {
 	domains := CheckDomains(s)
 
 	if len(domains) == 1 {
-		res := domains[0] + " may be available!"
+		res := fmt.Sprintf("%s %s may be available!",
+			m.Author.Mention(), domains[0])
 		log.Printf("'all %s' returned '%s'", s, res)
 		return res
 	}
 
 	if len(domains) > 0 {
-		res := fmt.Sprintf("%s and %s may be available!", strings.Join(domains[:len(domains)-1], ", "), domains[len(domains)-1])
+		res := fmt.Sprintf("%s %s and %s may be available!",
+			m.Author.Mention(),
+			strings.Join(domains[:len(domains)-1], ", "),
+			domains[len(domains)-1])
 		log.Printf("'all %s' returned '%s'", s, res)
 		return res
 	}
 
-	res := "None of the common TLDs are available for this."
+	res := fmt.Sprintf("%s none of the common TLDs are available for '%s'.",
+		m.Author.Mention(), s)
 	log.Printf("'all %s' returned '%s'", s, res)
 	return res
 }

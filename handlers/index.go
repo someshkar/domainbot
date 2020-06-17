@@ -19,7 +19,7 @@ func MainHandler(s *d.Session, m *d.MessageCreate) {
 
 		if mSlice[1] == "all" {
 			// Handle multiple domains
-			s.ChannelMessageSend(m.ChannelID, lib.AllDomainRes(mSlice[2]))
+			s.ChannelMessageSend(m.ChannelID, lib.AllDomainRes(mSlice[2], m))
 			return
 		}
 
@@ -30,6 +30,6 @@ func MainHandler(s *d.Session, m *d.MessageCreate) {
 		}
 
 		// Handle single domain
-		s.ChannelMessageSend(m.ChannelID, lib.SingleDomainRes(mSlice[1]))
+		s.ChannelMessageSend(m.ChannelID, lib.SingleDomainRes(mSlice[1], m))
 	}
 }
