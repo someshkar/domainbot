@@ -3,6 +3,7 @@ package lib
 import (
 	"fmt"
 	"log"
+	"strings"
 	"time"
 
 	d "github.com/bwmarrin/discordgo"
@@ -13,7 +14,14 @@ import (
 // SingleDomainRes generates the Domainbot
 // response for a single domain
 func SingleDomainRes(domain string, m *d.MessageCreate) string {
-	isRegistered, registrar, expiryStr := checkDomain(domain)
+	isRegistered, tldSupported, registrar, expiryStr := checkDomain(domain)
+
+	if !tldSupported {
+		tld := strings.Split(domain, ".")[1]
+		res := fmt.Sprintf("%s the .%s TLD isn't currently supported.", m.Author.Mention(), tld)
+		log.Printf("'%s' returned '%s'", domain, res)
+		return res
+	}
 
 	if isRegistered {
 		t, _ := time.Parse(time.RFC3339, expiryStr)
@@ -33,7 +41,7 @@ func SingleDomainRes(domain string, m *d.MessageCreate) string {
 }
 
 // checkDomain checks if a domain is available and returns relevant info if it is
-func checkDomain(domain string) (taken bool, registrar string, expiryDate string) {
+func checkDomain(domain string) (taken bool, tldSupported bool, registrar string, expiryDate string) {
 	raw, err := whois.Whois(domain)
 	if err != nil {
 		log.Println(err)
@@ -42,10 +50,15 @@ func checkDomain(domain string) (taken bool, registrar string, expiryDate string
 	result, err := whoisparser.Parse(raw)
 	if err != nil {
 		if err == whoisparser.ErrDomainNotFound {
-			return false, "", ""
+			return false, true, "", ""
 		}
+
+		if err == whoisparser.ErrDomainInvalidData || err == whoisparser.ErrDomainLimitExceed {
+			return false, false, "", ""
+		}
+
 		log.Println(err)
 	}
 
-	return true, result.Registrar.Name, result.Domain.ExpirationDate
+	return true, true, result.Registrar.Name, result.Domain.ExpirationDate
 }
